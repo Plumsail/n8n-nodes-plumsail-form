@@ -1,68 +1,34 @@
-# Plumsail Forms — n8n connector
+# Plumsail Forms n8n Connector
 
-n8n community node package for Plumsail Forms. Authorizes via API keys.
+Integrate Plumsail Forms with your n8n workflows.
 
-- **Plumsail Forms Trigger** — fires on form submission.
-- **Plumsail Forms** — actions: Submission → Delete, Attachment → Delete.
+## Nodes
 
-## Layout
+- **Plumsail Forms Trigger** — starts a workflow when a form is submitted.
+- **Plumsail Forms** — provides the following actions:
+  - Submission → Delete
+  - Attachment → Delete
+
+## Installation
+
+In n8n, go to **Settings → Community Nodes → Install** and enter:
+
 ```
-apps/N8N/
-├── credentials/PlumsailFormsApi.credentials.ts
-├── nodes/
-│   ├── Forms.node.ts         # actions + credential test
-│   ├── FormsTrigger.node.ts  # submission webhook trigger
-│   ├── Utils.ts              # request helper, base URL, forms loader
-│   └── icon.svg
-└── package.json               # "n8n" section registers nodes/credentials
-```
-
-## Setup (once)
-
-```bash
-npm install -g n8n
-cd apps/N8N && yarn install && yarn build
-npm link
-
-mkdir -p ~/.n8n/custom && cd ~/.n8n/custom   # %USERPROFILE%\.n8n\custom on Windows
-npm init -y
-npm link n8n-nodes-plumsail-forms
+n8n-nodes-plumsail-forms
 ```
 
-## Run (dev, local API)
+## Credentials
 
-```bash
-yarn build   # after any code change
+You need a Plumsail Forms API key. You can create one in **Plumsail Account → Forms → API keys**.
 
-PLUMSAIL_FORMS_BASE_URL=http://localhost:32101/api n8n start   # bash
-$env:PLUMSAIL_FORMS_BASE_URL="http://localhost:32101/api"; n8n start   # PowerShell
-```
+In n8n, create a **Plumsail Forms API** credential and paste the API key. Click **Test** to verify that the connection works.
 
-Open http://localhost:5678
+## Usage
 
-## Run (prod)
+### Trigger
 
-```bash
-yarn build
-n8n start
-```
+Add the *Plumsail Forms Trigger* node, select a form from the dropdown, and activate the workflow. New submissions to the selected form will automatically trigger the workflow.
 
-The trigger needs a reachable callback URL. If n8n has no public URL bound (no `WEBHOOK_URL` set), expose it with ngrok:
+### Actions
 
-```bash
-ngrok http 5678
-
-WEBHOOK_URL=https://<id>.ngrok.io/ n8n start   # bash
-$env:WEBHOOK_URL="https://<id>.ngrok.io/"; n8n start # PowerShell
-```
-
-Open http://localhost:5678
-
-## Publish
-
-```bash
-yarn build
-yarn npm publish
-```
-
-Installed via **Settings → Community Nodes**. Verified-node badge needs a [review submission](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/).
+Add the *Plumsail Forms* node, select an operation (Submission → Delete or Attachment → Delete), and provide the required fields.
