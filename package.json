@@ -1,0 +1,46 @@
+{
+    "name": "n8n-nodes-plumsail-forms",
+    "version": "1.0.0",
+    "description": "Plumsail Forms allows you to create public web forms, share them with your users, and automate submission processing. This node package integrates Plumsail Forms with n8n, allowing you to process form submissions in your workflows.",
+    "keywords": [
+        "n8n-community-node-package",
+        "plumsail",
+        "forms"
+    ],
+    "repository": "https://plumsail.com/forms/public-forms/",
+    "homepage": "https://plumsail.com/forms/public-forms/",
+    "author": "Plumsail Inc. <support@plumsail.com>",
+    "license": "MIT",
+    "main": "index.js",
+    "engines": {
+        "node": ">=18.10"
+    },
+    "scripts": {
+        "build": "tsc && gulp build:icons",
+        "dev": "tsc --watch",
+        "prepublishOnly": "yarn build"
+    },
+    "files": [
+        "dist"
+    ],
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "credentials": [
+            "dist/credentials/PlumsailFormsApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/Forms.node.js",
+            "dist/nodes/FormsTrigger.node.js"
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "^18.19.0",
+        "gulp": "^4.0.2",
+        "n8n-workflow": "^1.120.0",
+        "typescript": "^5.5.0"
+    },
+    "peerDependencies": {
+        "n8n-workflow": "*"
+    },
+    "packageManager": "yarn@4.7.0"
+}
