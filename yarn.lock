@@ -75,6 +75,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@plumsail/n8n-nodes-plumsail-forms@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@plumsail/n8n-nodes-plumsail-forms@workspace:."
+  dependencies:
+    "@types/node": "npm:^18.19.0"
+    gulp: "npm:^4.0.2"
+    n8n-workflow: "npm:^1.120.0"
+    typescript: "npm:^5.5.0"
+  peerDependencies:
+    n8n-workflow: "*"
+  languageName: unknown
+  linkType: soft
+
 "@types/node@npm:^18.19.0":
   version: 18.19.130
   resolution: "@types/node@npm:18.19.130"
@@ -2297,19 +2310,6 @@ __metadata:
   checksum: 10c0/5b6a20ee77cbe9e61fa52cfb1f2ddf1c21d49a0c874a2f6a24bbff962031084a0694a0258e92b33c0f492229416031c1a53d4dcffc902b981daff2379fd40903
   languageName: node
   linkType: hard
-
-"n8n-nodes-plumsail-forms@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "n8n-nodes-plumsail-forms@workspace:."
-  dependencies:
-    "@types/node": "npm:^18.19.0"
-    gulp: "npm:^4.0.2"
-    n8n-workflow: "npm:^1.120.0"
-    typescript: "npm:^5.5.0"
-  peerDependencies:
-    n8n-workflow: "*"
-  languageName: unknown
-  linkType: soft
 
 "n8n-workflow@npm:^1.120.0":
   version: 1.120.20
