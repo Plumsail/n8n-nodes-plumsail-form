@@ -1,6 +1,6 @@
 # Plumsail Forms n8n Connector
 
-Integrate Plumsail Forms with your n8n workflows.
+Integrate [Plumsail Forms](https://plumsail.com/forms/public-forms/) with your [n8n](https://n8n.io/) workflows.
 
 ## Nodes
 
@@ -19,7 +19,7 @@ n8n-nodes-plumsail-forms
 
 ## Credentials
 
-You need a Plumsail Forms API key. You can create one in **Plumsail Account → Forms → API keys**.
+You need a [Plumsail Forms API key](https://account.plumsail.com/forms/api-keys). You can create one in **Plumsail Account → Forms → API keys**.
 
 In n8n, create a **Plumsail Forms API** credential and paste the API key. Click **Test** to verify that the connection works.
 

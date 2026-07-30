@@ -1,6 +1,6 @@
 {
     "name": "@plumsail/n8n-nodes-plumsail-forms",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Plumsail Forms allows you to create public web forms, share them with your users, and automate submission processing. This node package integrates Plumsail Forms with n8n, allowing you to process form submissions in your workflows.",
     "keywords": [
         "n8n-community-node-package",
