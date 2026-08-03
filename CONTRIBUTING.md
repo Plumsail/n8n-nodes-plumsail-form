@@ -4,7 +4,7 @@ For the end-user-facing description, see [README.md](README.md).
 
 ## Layout
 ```
-apps/n8n/
+.
 ├── credentials/PlumsailFormsApi.credentials.ts
 ├── nodes/
 │   ├── Forms.node.ts         # actions + credential test
@@ -18,7 +18,7 @@ apps/n8n/
 
 ```bash
 npm install -g n8n
-cd apps/n8n && yarn install && yarn build
+yarn install && yarn build
 npm link
 
 mkdir -p ~/.n8n/custom && cd ~/.n8n/custom   # %USERPROFILE%\.n8n\custom on Windows
