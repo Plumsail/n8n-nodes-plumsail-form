@@ -8,20 +8,22 @@ import type {
     INodeExecutionData,
     INodePropertyOptions,
     INodeType,
-    INodeTypeDescription
+    INodeTypeDescription,
+    JsonObject
 } from 'n8n-workflow';
-import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
+import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-import { getBaseUrl, loadForms, sendApiRequest } from './Utils';
+import { getBaseUrl, loadForms, sendApiRequest } from '../Utils';
 
 // The class name must match the file basename — n8n's package loader resolves the export by it.
-export class Forms implements INodeType {
+export class PlumsailForms implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Plumsail Forms',
         name: 'plumsailForms',
-        icon: 'file:icon.svg',
+        icon: 'file:../icon.svg',
         group: ['transform'],
         version: 1,
+        usableAsTool: true,
         subtitle:
             '={{$parameter["operation"] === "deleteSubmission" ? "Delete a submission" : "Delete an attachment"}}',
         description: 'Manage Plumsail Forms submissions and attachments',
@@ -87,7 +89,7 @@ export class Forms implements INodeType {
                         operation: ['deleteSubmission']
                     }
                 },
-                placeholder: '2020-03-31T13:00:00-7e00a789-d102-4f2a-8c3e-33987c2b0dca',
+                placeholder: '7e00a789-d102-4f2a-8c3e-33987c2b0dca',
                 description: 'ID of the submission to delete (its __id field)'
             },
             {
@@ -116,13 +118,17 @@ export class Forms implements INodeType {
             ): Promise<INodeCredentialTestResult> {
                 const apiKey = credential.data?.apiKey as string;
 
+                // ICredentialTestFunctions.helpers only exposes the deprecated `request` — no
+                // `httpRequest` — so this uses the platform fetch instead of either helper.
                 try {
-                    await this.helpers.request({
+                    const response = await fetch(`${getBaseUrl(apiKey)}/v2/designer/forms`, {
                         method: 'GET',
-                        url: `${getBaseUrl(apiKey)}/v2/designer/forms`,
-                        headers: { 'X-Api-Key': apiKey },
-                        json: true
+                        headers: { 'X-Api-Key': apiKey }
                     });
+
+                    if (!response.ok) {
+                        return { status: 'Error', message: `Request failed with status ${response.status}` };
+                    }
                 } catch (error) {
                     return { status: 'Error', message: (error as Error).message };
                 }
@@ -185,7 +191,9 @@ export class Forms implements INodeType {
                     });
                     continue;
                 }
-                throw error;
+                throw error instanceof NodeOperationError || error instanceof NodeApiError
+                    ? error
+                    : new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
             }
         }
 

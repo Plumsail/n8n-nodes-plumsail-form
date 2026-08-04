@@ -12,7 +12,10 @@
         "url": "git+https://github.com/Plumsail/n8n-nodes-plumsail-form.git"
     },
     "homepage": "https://plumsail.com/forms/public-forms/",
-    "author": "Plumsail Inc. <support@plumsail.com>",
+    "author": {
+        "name": "Plumsail Inc.",
+        "email": "support@plumsail.com"
+    },
     "license": "MIT",
     "main": "index.js",
     "engines": {
@@ -32,8 +35,8 @@
             "dist/credentials/PlumsailFormsApi.credentials.js"
         ],
         "nodes": [
-            "dist/nodes/Forms.node.js",
-            "dist/nodes/FormsTrigger.node.js"
+            "dist/nodes/Forms/PlumsailForms.node.js",
+            "dist/nodes/FormsTrigger/PlumsailFormsTrigger.node.js"
         ]
     },
     "devDependencies": {

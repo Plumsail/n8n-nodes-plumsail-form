@@ -2,6 +2,7 @@ import type {
     IAuthenticateGeneric,
     ICredentialTestRequest,
     ICredentialType,
+    Icon,
     INodeProperties
 } from 'n8n-workflow';
 
@@ -11,6 +12,8 @@ export class PlumsailFormsApi implements ICredentialType {
     name = 'plumsailFormsApi';
 
     displayName = 'Plumsail Forms API';
+
+    icon: Icon = 'file:../nodes/icon.svg';
 
     documentationUrl = 'https://plumsail.com/docs/forms-web/';
 
@@ -40,8 +43,6 @@ export class PlumsailFormsApi implements ICredentialType {
     // A credential's `test` can only be a declarative request (n8n-workflow's ICredentialTestRequest
     // has no function-valued fields), so it can't call the real getBaseUrl() in Utils.ts. This
     // expression mirrors that function's region-prefix logic — keep the two in sync if it changes.
-    // (No $env.PLUMSAIL_FORMS_BASE_URL override here: n8n blocks env access in expressions by
-    // default, and that override is a local-dev convenience, not something end users need.)
     test: ICredentialTestRequest = {
         request: {
             baseURL: `={{
