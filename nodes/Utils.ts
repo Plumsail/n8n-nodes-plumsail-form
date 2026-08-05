@@ -17,15 +17,10 @@ import { NodeApiError } from 'n8n-workflow';
  * subdomain ({region}-forms.plumsail.com), so new regions work without a package update.
  * A key without a region prefix is not a valid Forms API key and is rejected.
  *
- * PLUMSAIL_FORMS_BASE_URL overrides this entirely when set, for pointing a local n8n
- * instance at a local API during development — see README "Run (dev, local API)". It has no
- * effect on the published package's default behavior, which always targets production.
+ * To point this at a local API for development, edit this function temporarily —
+ * see CONTRIBUTING.md "Run (dev, local API)". Don't commit that edit.
  */
 export function getBaseUrl(apiKey: string): string {
-    if (process.env.PLUMSAIL_FORMS_BASE_URL) {
-        return process.env.PLUMSAIL_FORMS_BASE_URL.replace(/\/+$/, '');
-    }
-
     const separator = apiKey.indexOf('_');
     if (separator <= 0) {
         throw new Error('Invalid API key');

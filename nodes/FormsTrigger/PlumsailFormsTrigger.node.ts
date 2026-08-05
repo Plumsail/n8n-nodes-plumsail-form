@@ -9,16 +9,17 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes } from 'n8n-workflow';
 
-import { loadForms, sendApiRequest } from './Utils';
+import { loadForms, sendApiRequest } from '../Utils';
 
 // The class name must match the file basename — n8n's package loader resolves the export by it.
-export class FormsTrigger implements INodeType {
+export class PlumsailFormsTrigger implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Plumsail Forms Trigger',
         name: 'plumsailFormsTrigger',
-        icon: 'file:icon.svg',
+        icon: 'file:../icon.svg',
         group: ['trigger'],
         version: 1,
+        usableAsTool: true,
         subtitle: 'New submission',
         description: 'Starts the workflow when a Plumsail form is submitted',
         defaults: {
@@ -110,7 +111,8 @@ export class FormsTrigger implements INodeType {
 
                 try {
                     await sendApiRequest.call(this, 'DELETE', `submissions/${webhookData.subscriberId}`);
-                } catch {
+                } catch (error) {
+                    this.logger.error('Failed to delete Plumsail Forms webhook subscription', { error });
                     return false;
                 }
 

@@ -7,9 +7,9 @@ For the end-user-facing description, see [README.md](README.md).
 .
 ├── credentials/PlumsailFormsApi.credentials.ts
 ├── nodes/
-│   ├── Forms.node.ts         # actions + credential test
-│   ├── FormsTrigger.node.ts  # submission webhook trigger
-│   ├── Utils.ts              # request helper, base URL, forms loader
+│   ├── Forms/PlumsailForms.node.ts               # actions + credential test
+│   ├── FormsTrigger/PlumsailFormsTrigger.node.ts # submission webhook trigger
+│   ├── Utils.ts                                  # request helper, base URL, forms loader
 │   └── icon.svg
 └── package.json               # "n8n" section registers nodes/credentials
 ```
@@ -23,16 +23,24 @@ npm link
 
 mkdir -p ~/.n8n/custom && cd ~/.n8n/custom   # %USERPROFILE%\.n8n\custom on Windows
 npm init -y
-npm link n8n-nodes-plumsail-forms
+npm link @plumsail/n8n-nodes-plumsail-forms
 ```
 
 ## Run (dev, local API)
 
+`getBaseUrl()` in `nodes/Utils.ts` always derives the API URL from the credential's key prefix
+(e.g. `us_...` → `https://us-forms.plumsail.com/api`). To point it at a local API instead,
+temporarily replace its body — **do not commit this change**:
+
+```ts
+export function getBaseUrl(apiKey: string): string {
+    return 'http://localhost:32101/api'; // TEMP: local dev only, revert before committing
+}
+```
+
 ```bash
 yarn build   # after any code change
-
-PLUMSAIL_FORMS_BASE_URL=http://localhost:32101/api n8n start   # bash
-$env:PLUMSAIL_FORMS_BASE_URL="http://localhost:32101/api"; n8n start   # PowerShell
+n8n start
 ```
 
 Open http://localhost:5678
