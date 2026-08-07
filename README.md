@@ -14,7 +14,7 @@ Integrate [Plumsail Forms](https://plumsail.com/forms/public-forms/) with your [
 In n8n, go to **Settings → Community Nodes → Install** and enter:
 
 ```
-n8n-nodes-plumsail-forms
+@plumsail/n8n-nodes-plumsail-forms
 ```
 
 ## Credentials
