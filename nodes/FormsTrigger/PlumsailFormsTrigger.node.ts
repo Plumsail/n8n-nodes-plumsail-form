@@ -19,7 +19,6 @@ export class PlumsailFormsTrigger implements INodeType {
         icon: 'file:../icon.svg',
         group: ['trigger'],
         version: 1,
-        usableAsTool: true,
         subtitle: 'New submission',
         description: 'Starts the workflow when a Plumsail form is submitted',
         defaults: {
