@@ -13,7 +13,10 @@ export class PlumsailFormsApi implements ICredentialType {
 
     displayName = 'Plumsail Forms API';
 
-    icon: Icon = 'file:../nodes/icon.svg';
+    icon: Icon = {
+        light: 'file:../nodes/icon.svg',
+        dark: 'file:../nodes/icon.dark.svg'
+    }
 
     documentationUrl = 'https://plumsail.com/docs/forms-web/';
 

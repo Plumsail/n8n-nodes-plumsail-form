@@ -16,7 +16,10 @@ export class PlumsailFormsTrigger implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Plumsail Forms Trigger',
         name: 'plumsailFormsTrigger',
-        icon: 'file:../icon.svg',
+        icon: {
+            light: 'file:../icon.svg',
+            dark: 'file:../icon.dark.svg'
+        },
         group: ['trigger'],
         version: 1,
         subtitle: 'New submission',

@@ -20,7 +20,10 @@ export class PlumsailForms implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Plumsail Forms',
         name: 'plumsailForms',
-        icon: 'file:../icon.svg',
+        icon: {
+            light: 'file:../icon.svg',
+            dark: 'file:../icon.dark.svg'
+        },
         group: ['transform'],
         version: 1,
         usableAsTool: true,
